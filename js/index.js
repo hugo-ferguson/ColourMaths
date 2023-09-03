@@ -1,6 +1,6 @@
-import { ColourRGB } from "./modules/ColourRGB";
-import { ColourVector } from "./modules/ColourVector";
-import { DuffySpace } from "./modules/DuffySpace";
+import { ColourRGB } from "./modules/ColourRGB.js";
+import { ColourVector } from "./modules/ColourVector.js";
+import { DuffySpace } from "./modules/DuffySpace.js";
 
 let operation = "add";
 let colour1RGB = new ColourRGB(0, 0, 0);
