@@ -1,4 +1,4 @@
-import {Quaternion} from "./Quaternion";
+import {Quaternion} from "./Quaternion.js";
 
 class ColourVector {
     constructor(w, c, m, y) {
