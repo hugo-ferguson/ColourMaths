@@ -1,50 +1,63 @@
+/**
+ * A quaternion q, where q = a + bi + cj + dk
+ */
 class Quaternion {
-    constructor(w, x, y, z) {
-        this._w = w;
-        this._x = x;
-        this._y = y;
-        this._z = z;
+    /**
+     * Create a quaternion.
+     * @param {number} a - The scalar component of the quaternion.
+     * @param {number} b - The real multiple of the basis vector i.
+     * @param {number} c - The real multiple of the basis vector j.
+     * @param {number} d - The real multiple of the basis vector k.
+     */
+    constructor(a, b, c, d) {
+        this._a = a;
+        this._b = b;
+        this._c = c;
+        this._d = d;
     }
 
-    get w() {
-        return this._w;
+    /**
+     * Return a, the scalar component a.
+     * @return {number} a.
+     */
+    get a() {
+        return this._a;
     }
 
-    get x() {
-        return this._x;
+    /**
+     * Return b, the real multiple of the basis vector i.
+     * @return {number} b.
+     */
+    get b() {
+        return this._b;
     }
 
-    get y() {
-        return this._y;
+    /**
+     * Return c, the real multiple of the basis vector j.
+     * @return {number} c.
+     */
+    get c() {
+        return this._c;
     }
 
-    get z() {
-        return this._z;
+    /**
+     * Return d, the real multiple of the basis vector k.
+     * @return {number} d.
+     */
+    get d() {
+        return this._d;
     }
 
-    mul(quaternion) {
-        let w = this.w * quaternion.w - 
-            this.x * quaternion.x - 
-            this.y * quaternion.y - 
-            this.z * quaternion.z;
-
-        let x = this.w * quaternion.x +
-            this.x * quaternion.w +
-            this.y * quaternion.z - 
-            this.z * quaternion.y;
-
-        let y = this.w * quaternion.y -
-            this.x * quaternion.z +
-            this.y * quaternion.w +
-            this.z * quaternion.x;
-        
-        let z = this.w * quaternion.z +
-            this.x * quaternion.y -
-            this.y * quaternion.x +
-            this.z * quaternion.w;
-
-        return new Quaternion(w, x, y, z)
+    /**
+     * Return a string representation of this quaternion, e.g., '{a} + {b}i + {c}j + {d}k'.
+     * @return {string} A string representation of this quaternion.
+     */
+    toString() {
+        return this.a + " + " +
+            this.b + "i + " +
+            this.c + "j + " +
+            this.d + "k";
     }
 }
 
-export {Quaternion};
+export { Quaternion };

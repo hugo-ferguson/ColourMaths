@@ -1,56 +1,59 @@
-import { ColourRGB } from "./modules/ColourRGB.js";
-import { ColourVector } from "./modules/ColourVector.js";
-import { DuffySpace } from "./modules/DuffySpace.js";
+import { DuffySpace } from './modules/DuffySpace.js';
+import { Transform } from './modules/Transform.js';
+import { RGB } from './modules/RGB.js';
 
+// Default values for operation and input colours.
 let operation = "add";
-let colour1RGB = new ColourRGB(0, 0, 0);
-let colour2RGB = new ColourRGB(0, 0, 0);
+let rgbColour1 = new RGB(0, 0, 0);
+let rgbColour2 = new RGB(0, 0, 0);
 
-function setOperation() {
-    operation = operationSelect.value;
-}
-
-function setColour1() {
-    colour1RGB.fromString(colour1Picker.value);
-}
-
-function setColour2 () {
-    colour2RGB.fromString(colour2Picker.value);
-}
-
+/**
+ * Calculate the selected operation for the two
+ * selected colours, rgbColour1 and rgbColour2.
+ */
 function calculate() {
-    colour1RGB.fromString(colour1Picker.value);
-    colour2RGB.fromString(colour2Picker.value);
+    // Update operation to selected value.
+    operation = selectOperation.value;
 
-    let colour1Vector = DuffySpace.RGBToVector(colour1RGB);
-    let colour2Vector = DuffySpace.RGBToVector(colour2RGB);
-    let colour3Vector;
+    // Update the two RGB colours to the selected values
+    // from the colour pickers.
+    rgbColour1.fromString(pickerColour1.value);
+    rgbColour2.fromString(pickerColour2.value);
 
+    // Create a Duffy representation of the two RGB colours.
+    let duffyColour1 = Transform.RGBToDuffy(rgbColour1);
+    let duffyColour2 = Transform.RGBToDuffy(rgbColour2);
+    let duffyColour3;
+
+    // Perform the corresponding operation in DuffySpace for the
+    // selected operation.
     switch(operation) {
         case "add":
-            colour3Vector = colour1Vector.add(colour2Vector);
+            duffyColour3 = DuffySpace.add(duffyColour1, duffyColour2);
             break;
         case "mul":
-            colour3Vector = colour1Vector.mul(colour2Vector);
+            duffyColour3 = DuffySpace.mul(duffyColour1, duffyColour2);
             break;
         case "div":
-            colour3Vector = colour1Vector.div(colour2Vector);
+            duffyColour3 = DuffySpace.div(duffyColour1, duffyColour2);
             break;
         case "sub":
-            colour3Vector = colour1Vector.sub(colour2Vector);
+            duffyColour3 = DuffySpace.sub(duffyColour1, duffyColour2);
             break;
+
+        
     }
 
-    colour3Picker.value = DuffySpace.VectorToRGB(colour3Vector).toString();
+    // Update the output colour picker value.
+    pickerColour3.value = Transform.DuffyToRGB(duffyColour3).toString();
 }
 
-let colour1Picker = document.getElementById("colour1");
-let colour2Picker = document.getElementById("colour2");
-let colour3Picker = document.getElementById("colour3");
-let calculateButton = document.getElementById("calculate");
-let operationSelect = document.getElementById("operation");
+// Element references.
+let pickerColour1 = document.getElementById("colour1");
+let pickerColour2 = document.getElementById("colour2");
+let pickerColour3 = document.getElementById("colour3");
+let buttonCalculate = document.getElementById("calculate");
+let selectOperation = document.getElementById("operation");
 
-calculateButton.addEventListener("click", calculate, false);
-operationSelect.addEventListener("change", setOperation, false);
-colour1Picker.addEventListener("change", setColour1, false);
-colour2Picker.addEventListener("change", setColour2, false);
+// Calculate on button click.
+buttonCalculate.addEventListener("click", calculate, false);
