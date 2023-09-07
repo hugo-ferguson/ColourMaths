@@ -124,17 +124,8 @@ class Transform {
             )
         )
 
-        // Map the elements of the vector to a new Duffy object.
-        // a -> w
-        // b -> c
-        // c -> m
-        // d -> y
-        return new Duffy(
-            v.a,
-            v.b,
-            v.c,
-            v.d
-        )
+        // Return a Duffy representation of the vector v.
+        return this.VectorToDuffy(v)
     }
 }
 
