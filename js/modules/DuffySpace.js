@@ -21,8 +21,6 @@ class DuffySpace {
         // Normalise the resulting vector sum.
         let vNorm = VectorSpace.normalise(vSum);
 
-        console.log(Transform.VectorToDuffy(vNorm))
-
         // Transform the normalised vector sum to a Duffy object.
         return Transform.VectorToDuffy(vNorm)
     }
